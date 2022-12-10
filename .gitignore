@@ -4,4 +4,5 @@
 bin/
 obj/
 *.user
+testsettings.*.json
 Light.SharedCore.Tests.Local.props
