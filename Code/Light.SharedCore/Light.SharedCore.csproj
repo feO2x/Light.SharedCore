@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <LangVersion>11.0</LangVersion>
+        <Version>1.0.0</Version>
+        <Authors>Kenny Pflug</Authors>
+        <Company>Kenny Pflug</Company>
+        <Copyright>Copyright © Kenny Pflug 2022</Copyright>
+        <Description>Provides common abstractions and in-memory implementations for writing .NET apps.</Description>
+        <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
+        <IsPackable>true</IsPackable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageProjectUrl>https://github.com/feO2x/Light.SharedCore</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/feO2x/Light.SharedCore.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Light.GuardClauses" Version="10.0.0" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
+        <PackageReference Include="IsExternalInit" Version="1.0.3" PrivateAssets="all" />
+    </ItemGroup>
+
+</Project>
