@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if !NETFRAMEWORK
+using System;
+#endif
 using FluentAssertions;
 using Light.SharedCore.Parsing;
 using Xunit;
@@ -14,10 +16,12 @@ public static class DoubleParserTests
     public static void ParseFloatingPointNumberWithDecimalPoint(string text, double expectedValue) =>
         CheckNumber(text, expectedValue);
 
+#if !NETFRAMEWORK
     [Theory]
     [MemberData(nameof(NumbersWithDecimalPoint))]
     public static void ParseFloatingPointNumberWithDecimalPointAsSpan(string text, double expectedValue) =>
         CheckNumberAsSpan(text, expectedValue);
+#endif
 
     public static readonly TheoryData<string, double> NumbersWithDecimalPoint =
         new ()
@@ -34,10 +38,13 @@ public static class DoubleParserTests
     public static void ParseFloatingPointNumberWithDecimalComma(string text, double expectedValue) =>
         CheckNumber(text, expectedValue);
 
+#if !NETFRAMEWORK
     [Theory]
     [MemberData(nameof(NumbersWithDecimalComma))]
     public static void ParseFloatingPointNumberWithDecimalCommaAsSpan(string text, double expectedValue) =>
         CheckNumberAsSpan(text, expectedValue);
+#endif
+    
 
     public static readonly TheoryData<string, double> NumbersWithDecimalComma =
         new ()
@@ -53,10 +60,12 @@ public static class DoubleParserTests
     public static void ParseInteger(string text, double expectedValue) =>
         CheckNumber(text, expectedValue);
 
+#if !NETFRAMEWORK
     [Theory]
     [MemberData(nameof(IntegerNumbers))]
     public static void ParseIntegerAsSpan(string text, double expectedValue) =>
         CheckNumberAsSpan(text, expectedValue);
+#endif
 
     public static readonly TheoryData<string, double> IntegerNumbers =
         new ()
@@ -75,6 +84,7 @@ public static class DoubleParserTests
         parsedValue.Should().BeApproximately(expectedValue, Precision);
     }
 
+#if !NETFRAMEWORK
     private static void CheckNumberAsSpan(ReadOnlySpan<char> text, double expectedValue)
     {
         var result = DoubleParser.TryParse(text, out var parsedValue);
@@ -82,6 +92,7 @@ public static class DoubleParserTests
         result.Should().BeTrue();
         parsedValue.Should().BeApproximately(expectedValue, Precision);
     }
+#endif
 
     [Theory]
     [MemberData(nameof(InvalidNumbers))]
@@ -93,6 +104,7 @@ public static class DoubleParserTests
         actualValue.Should().Be(default);
     }
 
+#if !NETFRAMEWORK
     [Theory]
     [MemberData(nameof(InvalidNumbers))]
     public static void InvalidNumberAsSpan(string text)
@@ -102,6 +114,7 @@ public static class DoubleParserTests
         result.Should().BeFalse();
         actualValue.Should().Be(default);
     }
+#endif
 
     public static readonly TheoryData<string?> InvalidNumbers =
         new ()

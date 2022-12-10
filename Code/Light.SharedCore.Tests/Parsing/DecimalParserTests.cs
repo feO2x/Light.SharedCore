@@ -12,10 +12,12 @@ public static class DecimalParserTests
     public static void ParseFloatingPointNumberWithDecimalPoint(string text, decimal expectedValue) =>
         CheckNumber(text, expectedValue);
 
+#if !NETFRAMEWORK
     [Theory]
     [MemberData(nameof(NumbersWithDecimalPoint))]
     public static void ParseFloatingPointNumberWithDecimalPointAsSpan(string text, decimal expectedValue) =>
         CheckNumberAsSpan(text, expectedValue);
+#endif
 
     public static readonly TheoryData<string, decimal> NumbersWithDecimalPoint =
         new ()
@@ -32,10 +34,12 @@ public static class DecimalParserTests
     public static void ParseFloatingPointNumberWithDecimalComma(string text, decimal expectedValue) =>
         CheckNumber(text, expectedValue);
 
+#if !NETFRAMEWORK
     [Theory]
     [MemberData(nameof(DecimalCommaData))]
     public static void ParseFloatingPointNumberWithDecimalCommaAsSpan(string text, decimal expectedValue) =>
         CheckNumberAsSpan(text, expectedValue);
+#endif
 
     public static readonly TheoryData<string, decimal> DecimalCommaData =
         new ()
@@ -51,10 +55,12 @@ public static class DecimalParserTests
     public static void ParseInteger(string text, decimal expectedValue) =>
         CheckNumber(text, expectedValue);
 
+#if !NETFRAMEWORK
     [Theory]
     [MemberData(nameof(IntegerData))]
     public static void ParseIntegerAsSpan(string text, decimal expectedValue) =>
         CheckNumberAsSpan(text, expectedValue);
+#endif
 
     public static readonly TheoryData<string, decimal> IntegerData =
         new ()
@@ -73,6 +79,7 @@ public static class DecimalParserTests
         parsedValue.Should().Be(expectedValue);
     }
 
+#if !NETFRAMEWORK
     private static void CheckNumberAsSpan(ReadOnlySpan<char> text, decimal expectedValue)
     {
         var result = DecimalParser.TryParse(text, out var parsedValue);
@@ -80,6 +87,7 @@ public static class DecimalParserTests
         result.Should().BeTrue();
         parsedValue.Should().Be(expectedValue);
     }
+#endif
 
     [Theory]
     [MemberData(nameof(InvalidNumbers))]
@@ -91,6 +99,7 @@ public static class DecimalParserTests
         actualValue.Should().Be(default);
     }
 
+#if !NETFRAMEWORK
     [Theory]
     [MemberData(nameof(InvalidNumbers))]
     public static void InvalidNumberAsSpan(string text)
@@ -100,6 +109,7 @@ public static class DecimalParserTests
         result.Should().BeFalse();
         actualValue.Should().Be(default);
     }
+#endif
 
     public static readonly TheoryData<string?> InvalidNumbers =
         new ()
