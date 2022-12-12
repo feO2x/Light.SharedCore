@@ -33,10 +33,11 @@ public static class AdditionalServiceCollectionPropertiesExtensions
     /// </exception>
     public static T GetAdditionalProperties<T>(this IServiceCollection services)
     {
-        var additionalProperties =
-            AdditionalProperties.GetValue(services.MustNotBeNull(),
-                                          _ => throw new InvalidOperationException(
-                                              $"Cannot instantiate additional service collection properties of type \"{typeof(T)}\"."));
+        var additionalProperties = AdditionalProperties.GetValue(
+            services.MustNotBeNull(),
+            _ => throw new InvalidOperationException($"Cannot instantiate additional service collection properties of type \"{typeof(T)}\".")
+        );
+
         if (additionalProperties is T castValue)
             return castValue;
 
