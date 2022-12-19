@@ -77,10 +77,12 @@ public static class StringEntityTests
         var x = new Entity("Foo");
         var y = default(Entity);
 
+        // ReSharper disable ConditionIsAlwaysTrueOrFalse
         (x == y).Should().BeFalse();
         (x != y).Should().BeTrue();
         (y == x).Should().BeFalse();
         (y != x).Should().BeTrue();
+        // ReSharper restore ConditionIsAlwaysTrueOrFalse
     }
 
     [Theory]

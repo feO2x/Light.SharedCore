@@ -17,8 +17,7 @@ public sealed class GenericAsyncFactory<T> : IAsyncFactory<T>
     /// Initializes a new instance of <see cref="GenericAsyncFactory{T}" />.
     /// </summary>
     /// <param name="createInstance">The delegate that creates the target object.</param>
-    public GenericAsyncFactory(Func<T> createInstance) =>
-        CreateInstance = createInstance.MustNotBeNull(nameof(createInstance));
+    public GenericAsyncFactory(Func<T> createInstance) => CreateInstance = createInstance.MustNotBeNull(nameof(createInstance));
 
     private Func<T> CreateInstance { get; }
 
@@ -37,6 +36,6 @@ public sealed class GenericAsyncFactory<T> : IAsyncFactory<T>
     private static async ValueTask<T> InitializeInstanceAsync(IInitializeAsync instance, CancellationToken cancellationToken)
     {
         await instance.InitializeAsync(cancellationToken);
-        return (T)instance;
+        return (T) instance;
     }
 }

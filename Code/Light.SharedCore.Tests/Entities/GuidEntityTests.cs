@@ -54,10 +54,12 @@ public static class GuidEntityTests
         var x = new Entity(Guid.Parse("CA015726-344D-4903-88B6-EBC0D21F2F20"));
         var y = default(Entity);
 
+        // ReSharper disable ConditionIsAlwaysTrueOrFalse
         (x == y).Should().BeFalse();
         (x != y).Should().BeTrue();
         (y == x).Should().BeFalse();
         (y != x).Should().BeTrue();
+        // ReSharper restore ConditionIsAlwaysTrueOrFalse
     }
 
     [Fact]
@@ -66,11 +68,13 @@ public static class GuidEntityTests
         var @null = default(Entity);
 
         // ReSharper disable EqualExpressionComparison
+        // ReSharper disable ConditionIsAlwaysTrueOrFalse
 #pragma warning disable CS1718 // We explicitly want to test the equality operators here
         (@null == @null).Should().BeTrue();
         (@null != @null).Should().BeFalse();
 #pragma warning restore CS1718
         // ReSharper restore EqualExpressionComparison
+        // ReSharper restore ConditionIsAlwaysTrueOrFalse
     }
 
     [Fact]
@@ -121,9 +125,6 @@ public static class GuidEntityTests
             Entity.AllowEmptyGuid = false;
         }
     }
-
-    // ReSharper restore ObjectCreationAsStatement
-#pragma warning restore CA1806
 
     [Theory]
     [InlineData("7202ACA4-05C7-4170-A19A-8330BF184835")]

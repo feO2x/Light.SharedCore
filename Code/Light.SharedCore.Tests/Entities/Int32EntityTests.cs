@@ -63,10 +63,12 @@ public sealed class Int32EntityTests
         var x = new Entity(1);
         var y = default(Entity);
 
+        // ReSharper disable ConditionIsAlwaysTrueOrFalse
         (x == y).Should().BeFalse();
         (x != y).Should().BeTrue();
         (y == x).Should().BeFalse();
         (y != x).Should().BeTrue();
+        // ReSharper restore ConditionIsAlwaysTrueOrFalse
     }
 
     [Fact]
@@ -75,11 +77,13 @@ public sealed class Int32EntityTests
         var @null = default(Entity);
 
         // ReSharper disable EqualExpressionComparison
+        // ReSharper disable ConditionIsAlwaysTrueOrFalse
 #pragma warning disable CS1718 // We explicitly want to test the equality operators here
         (@null == @null).Should().BeTrue();
         (@null != @null).Should().BeFalse();
 #pragma warning restore CS1718
         // ReSharper restore EqualExpressionComparison
+        // ReSharper restore ConditionIsAlwaysTrueOrFalse
     }
 
     [Theory]
