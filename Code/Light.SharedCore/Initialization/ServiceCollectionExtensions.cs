@@ -52,7 +52,7 @@ public static class ServiceCollectionExtensions
     /// The value indicating whether a Func&lt;TAbstraction&gt; is also registered with the DI container (optional).
     /// This factory delegate is necessary for the <see cref="GenericAsyncFactory{T}" /> to work properly. If null is
     /// specified, the default value will be obtained via the <see cref="AdditionalServiceCollectionProperties" />
-    /// attached to your <paramref cref="services" />. You can set this value to false if you use a proper DI container
+    /// attached to your services. You can set this value to false if you use a proper DI container
     /// like LightInject that offers function factories.
     /// </param>
     /// <typeparam name="TAbstraction">The abstraction that your concrete type implements.</typeparam>

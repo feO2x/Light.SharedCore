@@ -1,0 +1,1 @@
+dotnet pack Light.SharedCore.csproj -c Release /p:SignAssembly=true /p:AssemblyOriginatorKeyFile=bin/Light.SharedCore.snk /p:ContinuousIntegrationBuild=true
