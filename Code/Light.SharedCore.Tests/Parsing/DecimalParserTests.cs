@@ -91,7 +91,7 @@ public static class DecimalParserTests
 
     [Theory]
     [MemberData(nameof(InvalidNumbers))]
-    public static void InvalidNumber(string text)
+    public static void InvalidNumber(string? text)
     {
         var result = DecimalParser.TryParse(text, out var actualValue);
 
@@ -102,7 +102,7 @@ public static class DecimalParserTests
 #if !NETFRAMEWORK
     [Theory]
     [MemberData(nameof(InvalidNumbers))]
-    public static void InvalidNumberAsSpan(string text)
+    public static void InvalidNumberAsSpan(string? text)
     {
         var result = DecimalParser.TryParse(text.AsSpan(), out var actualValue);
 
