@@ -23,8 +23,8 @@ public interface IMutableId<in T>
     /// </para>
     /// <para>
     /// However, when inserting an entity into a database, the database will usually generate the ID
-    /// of the entity at this point in time. Updating the ID after the insert is complete is OK and
-    /// is the usual scenario where this method should be called.
+    /// of the entity at this point in time. Updating the ID after the insert is OK and
+    /// this is the usual scenario where this method should be called.
     /// </para>
     /// </summary>
     /// <param name="id">The new ID for the entity.</param>
