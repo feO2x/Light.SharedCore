@@ -3,13 +3,13 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
         <Nullable>enable</Nullable>
-        <LangVersion>11.0</LangVersion>
+        <LangVersion>12.0</LangVersion>
         <Version>1.0.0</Version>
         <Authors>Kenny Pflug</Authors>
         <Company>Kenny Pflug</Company>
         <Copyright>Copyright © Kenny Pflug 2022</Copyright>
         <Description>Provides common abstractions and in-memory implementations for writing .NET apps.</Description>
-        <PackageTags>data-access-abstractions;async-factory;clock;number-parsing;entities;dependency-injection-extensions</PackageTags>
+        <PackageTags>data-access-abstractions;clock;number-parsing;entities</PackageTags>
         <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
         <IsPackable>true</IsPackable>
         <PackageIcon>light-logo.png</PackageIcon>
@@ -38,12 +38,12 @@ Light.SharedCore 1.0.0
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="Light.GuardClauses" Version="10.0.0" />
-        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
+        <PackageReference Include="Light.GuardClauses" Version="11.0.0" />
+        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all" />
         <PackageReference Include="IsExternalInit" Version="1.0.3" PrivateAssets="all" />
         <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
     </ItemGroup>
     
     <ItemGroup>
