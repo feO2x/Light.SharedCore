@@ -66,7 +66,7 @@ public abstract class Int64Entity<T> : IEntity<long>, IEquatable<T>, IMutableId<
     /// Checks if the other instance is of the same entity type and has the same ID as this instance.
     /// </summary>
     /// <returns>True when both entities are considered equal, else false.</returns>
-    public override bool Equals(object @object) =>
+    public override bool Equals(object? @object) =>
         @object is T entity && Equals(entity);
 
     /// <summary>
@@ -108,7 +108,7 @@ public abstract class Int64Entity<T> : IEntity<long>, IEquatable<T>, IMutableId<
 
     /// <summary>
     /// <para>
-    /// Sets the Id after the entity is already initialized.
+    /// Sets the ID after the entity is already initialized.
     /// </para>
     /// <para>
     /// BE CAREFUL: you must not call this method when the ID of your Entity should already be immutable.

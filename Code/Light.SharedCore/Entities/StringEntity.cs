@@ -100,7 +100,7 @@ public abstract class StringEntity<T> : IEntity<string>, IEquatable<T>, IMutable
 
     /// <summary>
     /// <para>
-    /// Sets the Id after the entity is already initialized.
+    /// Sets the ID after the entity is already initialized.
     /// </para>
     /// <para>
     /// BE CAREFUL: you must not call this method when the ID of your Entity should already be immutable.

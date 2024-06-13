@@ -30,7 +30,7 @@ public static class DecimalParser
     /// <param name="text">The text to be parsed.</param>
     /// <param name="value">The parsed decimal value.</param>
     /// <returns>True if parsing was successful, else false.</returns>
-    public static bool TryParse(string text, out decimal value) =>
+    public static bool TryParse(string? text, out decimal value) =>
         TryParse(text, NumberStyles.Number, out value);
 
     /// <summary>
@@ -54,7 +54,7 @@ public static class DecimalParser
     /// <param name="style">The number style that describes how the parser will handle the text.</param>
     /// <param name="value">The parsed decimal value.</param>
     /// <returns>True if parsing was successful, else false.</returns>
-    public static bool TryParse(string text, NumberStyles style, out decimal value)
+    public static bool TryParse(string? text, NumberStyles style, out decimal value)
     {
         if (text.IsNullOrWhiteSpace())
         {

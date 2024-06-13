@@ -96,7 +96,7 @@ public static class DoubleParserTests
 
     [Theory]
     [MemberData(nameof(InvalidNumbers))]
-    public static void InvalidNumber(string text)
+    public static void InvalidNumber(string? text)
     {
         var result = DoubleParser.TryParse(text, out var actualValue);
 
@@ -107,7 +107,7 @@ public static class DoubleParserTests
 #if !NETFRAMEWORK
     [Theory]
     [MemberData(nameof(InvalidNumbers))]
-    public static void InvalidNumberAsSpan(string text)
+    public static void InvalidNumberAsSpan(string? text)
     {
         var result = DoubleParser.TryParse(text.AsSpan(), out var actualValue);
 
