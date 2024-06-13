@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Light.SharedCore.DataAccessAbstractions;
+namespace Light.SharedCore.DatabaseAccessAbstractions;
 
 /// <summary>
 /// Represents an asynchronous session to a database that is able to create individual transactions.
@@ -20,5 +20,5 @@ public interface IAsyncTransactionalSession : IAsyncReadOnlySession
     /// is still active in your current scope (to avoid nesting transactions).
     /// </summary>
     /// <param name="cancellationToken">The token to cancel this asynchronous operation (optional).</param>
-    Task<IAsyncTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
+    ValueTask<IAsyncTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
 }
