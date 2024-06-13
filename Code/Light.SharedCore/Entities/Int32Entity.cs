@@ -14,9 +14,7 @@ namespace Light.SharedCore.Entities;
 /// Your type that derives from this class. This generic parameter is used for
 /// the <see cref="IEquatable{T}" /> implementation.
 /// </typeparam>
-public abstract class Int32Entity<T> : IEntity<int>,
-                                       IEquatable<T>,
-                                       IMutableId<int>
+public abstract class Int32Entity<T> : IEntity<int>, IEquatable<T>, IMutableId<int>
     where T : Int32Entity<T>
 {
     private int _id;
@@ -69,11 +67,11 @@ public abstract class Int32Entity<T> : IEntity<int>,
     /// Checks if the other instance is of the same entity type and has the same ID as this instance.
     /// </summary>
     /// <returns>True when both entities are considered equal, else false.</returns>
-    public override bool Equals(object @object) =>
+    public override bool Equals(object? @object) =>
         @object is T entity && Equals(entity);
 
     /// <summary>
-    /// Returns the Id of the entity.
+    /// Returns the ID of the entity.
     /// </summary>
     public override int GetHashCode() => Id;
 
@@ -111,7 +109,7 @@ public abstract class Int32Entity<T> : IEntity<int>,
 
     /// <summary>
     /// <para>
-    /// Sets the Id after the entity is already initialized.
+    /// Sets the ID after the entity is already initialized.
     /// </para>
     /// <para>
     /// BE CAREFUL: you must not call this method when the ID of your Entity should already be immutable.

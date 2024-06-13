@@ -93,7 +93,7 @@ public static class FloatParserTests
 
     [Theory]
     [MemberData(nameof(InvalidNumbers))]
-    public static void InvalidNumber(string text)
+    public static void InvalidNumber(string? text)
     {
         var result = FloatParser.TryParse(text, out var actualValue);
 
@@ -104,7 +104,7 @@ public static class FloatParserTests
 #if !NETFRAMEWORK
     [Theory]
     [MemberData(nameof(InvalidNumbers))]
-    public static void InvalidNumberAsSpan(string text)
+    public static void InvalidNumberAsSpan(string? text)
     {
         var result = FloatParser.TryParse(text.AsSpan(), out var actualValue);
 
