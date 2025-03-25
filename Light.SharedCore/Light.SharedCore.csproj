@@ -4,10 +4,10 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <Nullable>enable</Nullable>
     <LangVersion>13.0</LangVersion>
-    <Version>2.0.0</Version>
+    <Version>3.0.0</Version>
     <Authors>Kenny Pflug</Authors>
     <Company>Kenny Pflug</Company>
-    <Copyright>Copyright © Kenny Pflug 2022, 2024</Copyright>
+    <Copyright>Copyright © Kenny Pflug 2022, 2025</Copyright>
     <Description>Provides common abstractions and in-memory infrastructure for writing .NET apps.</Description>
     <PackageTags>database-access-abstractions;clock;number-parsing;entities</PackageTags>
     <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
@@ -24,12 +24,10 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageReleaseNotes>
-Light.SharedCore 2.0.0
+Light.SharedCore 3.0.0
 --------------------------------
 
-- removed IAsyncFactory and service provider extensions
-- DatabaseAccessAbstractions is the new namespace containing session interfaces
-- reduced external dependencies
+- overhaul DatabaseAccessAbstractions: only ISession is left, all other interfaces were removed
 - read all docs at https://github.com/feO2x/Light.SharedCore
     </PackageReleaseNotes>
   </PropertyGroup>

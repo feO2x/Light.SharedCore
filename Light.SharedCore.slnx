@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/GitHub Workflows/">
+    <File Path=".github\workflows\build-and-test.yml" />
+    <File Path=".github\workflows\release-on-nuget.yml" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="LICENSE" />
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="Light.SharedCore.Tests/Light.SharedCore.Tests.csproj" />
+  <Project Path="Light.SharedCore/Light.SharedCore.csproj" />
+</Solution>
