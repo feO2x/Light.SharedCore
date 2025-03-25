@@ -190,6 +190,8 @@ Light.SharedCore also offers you the `FloatParser` and the `DecimalParser`. Furt
 
 ## Abstract from DateTime.UtcNow by using IClock
 
+> While .NET 8 introduced the `TimeProvider` class, we think that this API is too verbose (including its timer functionality). This is why we stick to the `IClock` interface of Light.SharedCore and promote using it.
+
 Light.SharedCore provides the `IClock` interface that abstracts calls to `DateTime.Now` and `DateTime.UtcNow`. This is usually required when testing your code, and you want to supply dedicated `DateTime` values to better control your tests. `IClock` has a method called `GetTime` that you can use to obtain the current time stamp.
 
 There are three implementations for `IClock`:
