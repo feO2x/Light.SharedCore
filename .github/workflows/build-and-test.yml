@@ -3,7 +3,7 @@ name: Build and Test
 on:
   push:
     branches: [main]
-    paths: ['Light.SharedCore/**', 'Light.SharedCore.Tests/**' 'build-and-test.yml']
+    paths: ['Light.SharedCore/**', 'Light.SharedCore.Tests/**', 'build-and-test.yml']
   pull_request:
     branches: [main]
     paths: ['Light.SharedCore/**', 'Light.SharedCore.Tests/**', 'build-and-test.yml']
