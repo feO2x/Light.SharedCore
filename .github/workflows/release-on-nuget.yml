@@ -25,12 +25,12 @@ jobs:
         env:
           LIGHT_SHAREDCORE_SNK: ${{ secrets.LIGHT_SHAREDCORE_SNK }}
         run: |
-          echo $LIGHT_SHAREDCORE_SNK | base64 --decode > ./Code/Light.SharedCore/Light.SharedCore.snk
+          echo $LIGHT_SHAREDCORE_SNK | base64 --decode > ./Light.SharedCore/Light.SharedCore.snk
       - name: Create NuGet packages
-        run: dotnet pack ./Code/Light.SharedCore/Light.SharedCore.csproj -c Release /p:SignAssembly=true /p:AssemblyOriginatorKeyFile=Light.SharedCore.snk /p:ContinuousIntegrationBuild=true
+        run: dotnet pack ./Light.SharedCore/Light.SharedCore.csproj -c Release /p:SignAssembly=true /p:AssemblyOriginatorKeyFile=Light.SharedCore.snk /p:ContinuousIntegrationBuild=true
       - name: Delete SNK file
-        run: rm ./Code/Light.SharedCore/Light.SharedCore.snk
+        run: rm ./Light.SharedCore/Light.SharedCore.snk
       - name: Push nupkg package
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: dotnet nuget push "./Code/Light.SharedCore/bin/Release/Light.SharedCore.*.nupkg" --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push "./Light.SharedCore/bin/Release/Light.SharedCore.*.nupkg" --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
