@@ -1,10 +1,11 @@
 # Light.SharedCore
+
 *Provides general abstractions, algorithms, and data structures for .NET*
 
 ![Light Logo](light-logo.png)
 
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://github.com/feO2x/Light.SharedCore/blob/main/LICENSE)
-[![NuGet](https://img.shields.io/badge/NuGet-2.0.0-blue.svg?style=for-the-badge)](https://www.nuget.org/packages/Light.SharedCore/)
+[![NuGet](https://img.shields.io/badge/NuGet-3.0.0-blue.svg?style=for-the-badge)](https://www.nuget.org/packages/Light.SharedCore/)
 
 # How to install
 
@@ -12,7 +13,7 @@ Light.SharedCore is compiled against [.NET Standard 2.0 and 2.1](https://docs.mi
 
 Light.SharedCore is available as a [NuGet package](https://www.nuget.org/packages/Light.SharedCore/) and can be installed via:
 
-- **Package Reference in csproj**: `<PackageReference Include="Light.SharedCore" Version="2.0.0" />`
+- **Package Reference in csproj**: `<PackageReference Include="Light.SharedCore" Version="3.0.0" />`
 - **dotnet CLI**: `dotnet add package Light.SharedCore`
 - **Visual Studio Package Manager Console**: `Install-Package Light.SharedCore`
 
@@ -259,10 +260,8 @@ Prefer UTC time stamps, especially in services and when saving date and time val
 
 ## Database access abstractions
 
-This package offers interfaces for accessing databases. Both the `IAsyncSession` and `ISession` interfaces represent the [Unit-of-Work Design Pattern](https://www.martinfowler.com/eaaCatalog/unitOfWork.html). We strongly recommend to use `IAsyncSession` by default as all database I/O should be executed in an asynchronous fashion to avoid threads being blocked during database queries. This is especially important when you try to scale service apps. Incoming requests will usually be handled by executing code on the .NET Thread Pool (e.g. in ASP.NET Core) which in turn will create new threads when it sees that its worker threads are blocked. With a high number of concurrent requests, you might end up in a situation where your service app responds really slowly because of all the overhead of new threads being created and the context switches between them (thread starvation).
+This package offers a new base interface for designing abstractions for database access. The `ISession` interface represents the [Unit-of-Work Design Pattern](https://www.martinfowler.com/eaaCatalog/unitOfWork.html) and offers a `Task SaveChangesAsync(CancellationToken)` method to explicitly trigger a commit to the underlying database access technology. This could be committing a transaction when using ADO.NET or Micro-ORMs like LinqToDB, Dapper, or MongoDB.Driver, as well as calling `SaveChangesAsync` on an Entity Framework Core `DbContext` for Full-ORMs. The `ISession` interface also derives from `IAsyncDisposable`. When the session is disposed before `SaveChangesAsync` is called, a rollback will be automatically executed by underlying implementations.
 
-However, some data access libraries do not support asynchronous queries. As of June 2024, e.g. SQLite did not override the asynchronous methods of ADO.NET - all calls will always be executed synchronously (even when you call the async APIs, like `DbConnection.OpenAsync`). You can resort to `ISession` in these circumstances. Please make sure that your ADO.NET provider overrides async methods properly.
+If you have been using Light.SharedCore in previous versions, you might wonder where the `IAsyncReadOnlySession` interface has gone. It has been removed in favor of simply using `IAsyncDisposable`. If you design database sessions that essentially behave like a client (without explicit transaction management by the caller), then simply derive your abstraction from `IAsyncDisposable` instead of the old `IAsyncReadOnlySession`. Also, all synchronous database interfaces as well as the sessions supporting transactions are gone (the current recommendation is to completely hide transaction objects like `DbTransaction` from business logic by implemeting specialized sessions).
 
-There is also an `IAsyncReadOnlySession` interface that derives from both `IDisposable` and `IAsyncDisposable`. It can be used to create abstractions for sessions that only read data and do not require an explicit transaction.
-
-If you need to support several transactions during a database session, then use the `IAsyncTransactionalSession` (or `ITransactionalSession`) interfaces. Instead of a `SaveChangesAsync` method, you can use this session type to manually begin transactions by calling `BeginTransactionAsync`. You can then save your changes by committing the transaction. Please be aware that you should not nest transaction, i.e. you should not call `BeginTransactionAsync` again while you still have an existing transaction in your current scope.
+ All database I/O should be executed in an asynchronous fashion to avoid threads being blocked during database queries. This is especially important when you try to scale service apps. Incoming requests will normally be handled by executing code on the .NET Thread Pool (e.g. in ASP.NET Core) which in turn will create new threads when it sees that its worker threads are blocked. With a high number of concurrent requests, you might end up in a situation where your service app responds really slowly because of all the overhead of new threads being created and the context switches between them (thread starvation).
