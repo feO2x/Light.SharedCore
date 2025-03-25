@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <Nullable>enable</Nullable>
-    <LangVersion>12.0</LangVersion>
+    <LangVersion>13.0</LangVersion>
     <Version>2.0.0</Version>
     <Authors>Kenny Pflug</Authors>
     <Company>Kenny Pflug</Company>
@@ -24,21 +24,21 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageReleaseNotes>
-      Light.SharedCore 2.0.0
-      --------------------------------
+Light.SharedCore 2.0.0
+--------------------------------
 
-      - removed IAsyncFactory and service provider extensions
-      - DatabaseAccessAbstractions is the new namespace containing session interfaces
-      - reduced external dependencies
-      - read all docs at https://github.com/feO2x/Light.SharedCore
+- removed IAsyncFactory and service provider extensions
+- DatabaseAccessAbstractions is the new namespace containing session interfaces
+- reduced external dependencies
+- read all docs at https://github.com/feO2x/Light.SharedCore
     </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Light.GuardClauses" Version="11.0.0" />
+    <PackageReference Include="Light.GuardClauses" Version="13.0.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all" />
     <PackageReference Include="IsExternalInit" Version="1.0.3" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
   </ItemGroup>
 
   <ItemGroup>
