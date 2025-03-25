@@ -56,9 +56,15 @@ public abstract class Int64Entity<T> : IEntity<long>, IEquatable<T>, IMutableId<
     private static long ValidateId(long id, string parameterName)
     {
         if (!AllowIdZero && id == 0L)
+        {
             throw new ArgumentOutOfRangeException(parameterName, $"{parameterName} must not be 0.");
+        }
+
         if (!AllowNegativeIds)
+        {
             id.MustNotBeLessThan(0L, parameterName);
+        }
+
         return id;
     }
 

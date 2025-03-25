@@ -58,7 +58,7 @@ public static class FloatParser
     {
         if (text.IsNullOrWhiteSpace())
         {
-            value = default;
+            value = 0;
             return false;
         }
 
@@ -117,7 +117,7 @@ public static class FloatParser
     {
         if (text.IsWhiteSpace())
         {
-            value = default;
+            value = 0;
             return false;
         }
 

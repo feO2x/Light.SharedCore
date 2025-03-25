@@ -86,7 +86,10 @@ public abstract class GuidEntity<T> : IEntity<Guid>, IEquatable<T>, IMutableId<G
     private static Guid ValidateId(Guid id, string parameterName)
     {
         if (!AllowEmptyGuid)
+        {
             id.MustNotBeEmpty(parameterName);
+        }
+
         return id;
     }
 

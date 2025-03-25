@@ -7,6 +7,18 @@ namespace Light.SharedCore.Tests.Entities;
 
 public static class StringEntityTests
 {
+    public static TheoryData<string> InvalidIds { get; } =
+        new ()
+        {
+            null!,
+            string.Empty,
+            "\t",
+            " ",
+            " IdWithWhiteSpaceAtTheBeginning",
+            "IdWithWhiteSpaceAtTheEnd\r\n",
+            new string('x', 201) // Too long
+        };
+
     [Fact]
     public static void MustImplementIEntityOfString() =>
         typeof(StringEntity<>).Should().Implement<IEntity<string>>();
@@ -162,18 +174,6 @@ public static class StringEntityTests
             Entity.ValidateId = Entity.ValidateTrimmedNotWhiteSpaceShorterThanOrEqualTo200;
         }
     }
-
-    public static TheoryData<string> InvalidIds { get; } =
-        new()
-        {
-            null!,
-            string.Empty,
-            "\t",
-            " ",
-            " IdWithWhiteSpaceAtTheBeginning",
-            "IdWithWhiteSpaceAtTheEnd\r\n",
-            new ('x', 201) // Too long
-        };
 
 
     private sealed class Entity : StringEntity

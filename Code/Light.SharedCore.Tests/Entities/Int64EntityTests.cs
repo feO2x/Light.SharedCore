@@ -88,7 +88,8 @@ public sealed class Int64EntityTests
     [InlineData(5L)]
     [InlineData(359_544L)]
     [InlineData(10001L)]
-    public static void ToStringShouldReturnSimpleTypeNameAndId(long id) => new Entity(id).ToString().Should().Be("Entity " + id);
+    public static void ToStringShouldReturnSimpleTypeNameAndId(long id) =>
+        new Entity(id).ToString().Should().Be("Entity " + id);
 
     [Theory]
     [MemberData(nameof(NegativeIds))]

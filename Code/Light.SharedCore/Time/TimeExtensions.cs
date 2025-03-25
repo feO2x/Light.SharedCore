@@ -15,26 +15,35 @@ public static class TimeExtensions
     public static TimeSpan CalculateIntervalForSameTimeNextDay(this DateTime now, DateTime timeOfDay)
     {
         var tomorrow = now.AddDays(1.0);
-        var targetDateTime = new DateTime(tomorrow.Year, tomorrow.Month, tomorrow.Day, timeOfDay.Hour, timeOfDay.Minute, timeOfDay.Second, timeOfDay.Millisecond, timeOfDay.Kind);
+        var targetDateTime = new DateTime(
+            tomorrow.Year,
+            tomorrow.Month,
+            tomorrow.Day,
+            timeOfDay.Hour,
+            timeOfDay.Minute,
+            timeOfDay.Second,
+            timeOfDay.Millisecond,
+            timeOfDay.Kind
+        );
         return targetDateTime.ToUniversalTime() - now.ToUniversalTime();
     }
 
     /// <summary>
-    /// Calculates the time span from <paramref name="now"/> until <paramref name="timeOfDay"/>. If
-    /// <paramref name="timeOfDay"/> was already reached on this day, the interval will be calculated
+    /// Calculates the time span from <paramref name="now" /> until <paramref name="timeOfDay" />. If
+    /// <paramref name="timeOfDay" /> was already reached on this day, the interval will be calculated
     /// for tomorrow.
     /// </summary>
     /// <remarks>
-    /// Returns a time span of 24 hours if <paramref name="now"/> is exactly <paramref name="timeOfDay"/>.
-    /// </remarks>>
+    /// Returns a time span of 24 hours if <paramref name="now" /> is exactly <paramref name="timeOfDay" />.
+    /// </remarks>
+    /// >
     /// <param name="now">The current time.</param>
     /// <param name="timeOfDay">The target time of the day. The date part of this value will be ignored.</param>
     public static TimeSpan CalculateIntervalUntil(this DateTime now, DateTime timeOfDay)
     {
-        var timeOfToday = new DateTime(now.Year, now.Month, now.Day, timeOfDay.Hour, timeOfDay.Minute, timeOfDay.Second);
-        return timeOfToday > now
-            ? timeOfToday - now
-            : now.CalculateIntervalForSameTimeNextDay(timeOfDay);
+        var timeOfToday =
+            new DateTime(now.Year, now.Month, now.Day, timeOfDay.Hour, timeOfDay.Minute, timeOfDay.Second);
+        return timeOfToday > now ? timeOfToday - now : now.CalculateIntervalForSameTimeNextDay(timeOfDay);
     }
 
     /// <summary>
@@ -47,7 +56,11 @@ public static class TimeExtensions
     /// <param name="dateTime">The resulting date time value when the conversion was successful.</param>
     /// <param name="kind">The kind of the resulting date time. The default value is <see cref="DateTimeKind.Local" />.</param>
     /// <returns>True if the conversion was successful, else false.</returns>
-    public static bool TryConvertToTimeOfDay(this TimeSpan timeSpan, out DateTime dateTime, DateTimeKind kind = DateTimeKind.Local)
+    public static bool TryConvertToTimeOfDay(
+        this TimeSpan timeSpan,
+        out DateTime dateTime,
+        DateTimeKind kind = DateTimeKind.Local
+    )
     {
         if (timeSpan.Hours >= 24 || timeSpan < TimeSpan.Zero)
         {
@@ -55,7 +68,16 @@ public static class TimeExtensions
             return false;
         }
 
-        dateTime = new (1, 1, 1, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds, kind);
+        dateTime = new DateTime(
+            1,
+            1,
+            1,
+            timeSpan.Hours,
+            timeSpan.Minutes,
+            timeSpan.Seconds,
+            timeSpan.Milliseconds,
+            kind
+        );
         return true;
     }
 

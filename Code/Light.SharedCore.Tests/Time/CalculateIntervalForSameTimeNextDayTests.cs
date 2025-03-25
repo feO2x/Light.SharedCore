@@ -9,17 +9,28 @@ namespace Light.SharedCore.Tests.Time;
 
 public static class CalculateIntervalForSameTimeNextDayTests
 {
+    public static readonly TheoryData<DateTime, TimeSpan> NonSpecificData =
+        new ()
+        {
+            { new DateTime(2017, 10, 4, 12, 0, 0, DateTimeKind.Local), new TimeSpan(16, 15, 0) }, // Simple example
+            { new DateTime(2016, 12, 31, 4, 15, 1, DateTimeKind.Local), new TimeSpan(23, 59, 59) } // New Year's Eve
+        };
+
+    public static readonly TheoryData<DateTime, TimeSpan> GermanSpecificData =
+        new ()
+        {
+            {
+                new DateTime(2017, 03, 25, 18, 0, 0, DateTimeKind.Local), new TimeSpan(9, 15, 0)
+            }, // Begin of Daylight Saving Time
+            {
+                new DateTime(2017, 10, 28, 18, 0, 0, DateTimeKind.Local), new TimeSpan(11, 15, 0)
+            } // End of Daylight Saving Time
+        };
+
     [Theory]
     [MemberData(nameof(NonSpecificData))]
     public static void CalculateTimeOfNextDayInNonSpecificCultureScenario(DateTime now, TimeSpan expected) =>
         CheckTimeSpan(now, expected);
-
-    public static readonly TheoryData<DateTime, TimeSpan> NonSpecificData =
-        new ()
-        {
-            { new (2017, 10, 4, 12, 0, 0, DateTimeKind.Local), new (16, 15, 0) }, // Simple example
-            { new (2016, 12, 31, 4, 15, 1, DateTimeKind.Local), new (23, 59, 59) }, // New Year's Eve
-        };
 
     [SkippableTheory]
     [MemberData(nameof(GermanSpecificData))]
@@ -28,13 +39,6 @@ public static class CalculateIntervalForSameTimeNextDayTests
         Skip.IfNot(TestSettings.Configuration.GetValue<bool>("areGermanCultureSpecificTestsEnabled"));
         CheckTimeSpan(now, expected);
     }
-
-    public static readonly TheoryData<DateTime, TimeSpan> GermanSpecificData =
-        new ()
-        {
-            { new (2017, 03, 25, 18, 0, 0, DateTimeKind.Local), new (9, 15, 0) }, // Begin of Daylight Saving Time
-            { new (2017, 10, 28, 18, 0, 0, DateTimeKind.Local), new (11, 15, 0) } // End of Daylight Saving Time
-        };
 
     private static void CheckTimeSpan(DateTime now, TimeSpan expected)
     {

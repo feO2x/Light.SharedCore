@@ -58,7 +58,7 @@ public static class DoubleParser
     {
         if (text.IsNullOrWhiteSpace())
         {
-            value = default;
+            value = 0;
             return false;
         }
 
@@ -117,7 +117,7 @@ public static class DoubleParser
     {
         if (text.IsWhiteSpace())
         {
-            value = default;
+            value = 0;
             return false;
         }
 
@@ -125,5 +125,5 @@ public static class DoubleParser
         var cultureInfo = result.ChooseCultureInfo();
         return double.TryParse(text, style, cultureInfo, out value);
     }
-#endif 
+#endif
 }

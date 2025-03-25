@@ -151,7 +151,7 @@ public static class GuidEntityTests
         var action = () => new Entity().ToMutable().SetId(Guid.Empty);
 
         action.Should().Throw<EmptyGuidException>()
-              .And.ParamName.Should().Be("id");
+           .And.ParamName.Should().Be("id");
     }
 
     [Fact]
