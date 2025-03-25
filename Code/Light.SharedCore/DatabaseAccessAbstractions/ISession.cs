@@ -17,7 +17,7 @@ namespace Light.SharedCore.DatabaseAccessAbstractions;
 /// </para>
 /// <para>
 /// If you don't want the caller to explicitly commit the changes, consider deriving your session from
-/// <see cref="IAsyncDisposable"/> directly. 
+/// <see cref="IAsyncDisposable" /> directly.
 /// </para>
 /// </summary>
 /// <remarks>

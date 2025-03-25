@@ -90,7 +90,8 @@ public sealed class Int32EntityTests
     [InlineData(1)]
     [InlineData(12)]
     [InlineData(5000)]
-    public static void ToStringShouldReturnSimpleTypeNameAndId(int id) => new Entity(id).ToString().Should().Be("Entity " + id);
+    public static void ToStringShouldReturnSimpleTypeNameAndId(int id) =>
+        new Entity(id).ToString().Should().Be("Entity " + id);
 
     [Theory]
     [MemberData(nameof(NegativeIds))]

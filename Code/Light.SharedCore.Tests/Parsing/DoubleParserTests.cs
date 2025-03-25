@@ -44,7 +44,7 @@ public static class DoubleParserTests
     public static void ParseFloatingPointNumberWithDecimalCommaAsSpan(string text, double expectedValue) =>
         CheckNumberAsSpan(text, expectedValue);
 #endif
-    
+
 
     public static readonly TheoryData<string, double> NumbersWithDecimalComma =
         new ()
@@ -101,7 +101,7 @@ public static class DoubleParserTests
         var result = DoubleParser.TryParse(text, out var actualValue);
 
         result.Should().BeFalse();
-        actualValue.Should().Be(default);
+        actualValue.Should().Be(0);
     }
 
 #if !NETFRAMEWORK
@@ -112,7 +112,7 @@ public static class DoubleParserTests
         var result = DoubleParser.TryParse(text.AsSpan(), out var actualValue);
 
         result.Should().BeFalse();
-        actualValue.Should().Be(default);
+        actualValue.Should().Be(0);
     }
 #endif
 

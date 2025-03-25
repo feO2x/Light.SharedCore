@@ -7,6 +7,22 @@ namespace Light.SharedCore.Tests.Time;
 
 public static class TestClockTests
 {
+    public static readonly TheoryData<DateTime> CustomDateTimes =
+        new ()
+        {
+            new DateTime(2018, 12, 4, 9, 22, 15, DateTimeKind.Local),
+            new DateTime(2010, 5, 19, 15, 37, 0, DateTimeKind.Unspecified),
+            new DateTime(1975, 2, 28, 12, 0, 0, DateTimeKind.Utc)
+        };
+
+    public static readonly TheoryData<TimeSpan> TimeSpans =
+        new ()
+        {
+            TimeSpan.FromSeconds(50),
+            TimeSpan.FromDays(14),
+            TimeSpan.FromMilliseconds(750)
+        };
+
     [Fact]
     public static void DefaultTimeIsSetToUtcNow()
     {
@@ -27,14 +43,6 @@ public static class TestClockTests
         testClock.GetTime().Should().Be(customDateTime);
     }
 
-    public static readonly TheoryData<DateTime> CustomDateTimes =
-        new ()
-        {
-            new (2018, 12, 4, 9, 22, 15, DateTimeKind.Local),
-            new (2010, 5, 19, 15, 37, 0, DateTimeKind.Unspecified),
-            new (1975, 2, 28, 12, 0, 0, DateTimeKind.Utc)
-        };
-
     [Theory]
     [MemberData(nameof(TimeSpans))]
     public static void AdvanceTime(TimeSpan timeSpan)
@@ -44,14 +52,6 @@ public static class TestClockTests
         resultingTime.Should().Be(testClock.InitialTime.Add(timeSpan));
     }
 
-    public static readonly TheoryData<TimeSpan> TimeSpans =
-        new ()
-        {
-            TimeSpan.FromSeconds(50),
-            TimeSpan.FromDays(14),
-            TimeSpan.FromMilliseconds(750)
-        };
-
     [Fact]
     public static void ProvideSeveralTimes()
     {
@@ -60,7 +60,7 @@ public static class TestClockTests
         var thirdTime = initialTime.AddHours(5);
         var testClock = new TestClock(initialTime, secondTime, thirdTime);
 
-        var capturedTimes = new []
+        var capturedTimes = new[]
         {
             testClock.GetTime(),
             testClock.GetTime(),

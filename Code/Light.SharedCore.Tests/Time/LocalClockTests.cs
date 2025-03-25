@@ -11,5 +11,6 @@ public static class LocalClockTests
     public static void MustReturnLocalTime() => new LocalClock().GetTime().Kind.Should().Be(DateTimeKind.Local);
 
     [Fact]
-    public static void TimeMustBeCloseToLocalTime() => new LocalClock().GetTime().Should().BeCloseTo(DateTime.Now, TimeSpan.FromSeconds(1));
+    public static void TimeMustBeCloseToLocalTime() =>
+        new LocalClock().GetTime().Should().BeCloseTo(DateTime.Now, TimeSpan.FromSeconds(1));
 }

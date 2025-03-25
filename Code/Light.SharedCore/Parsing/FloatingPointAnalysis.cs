@@ -15,7 +15,7 @@ public static class FloatingPointAnalysis
     /// to determine the decimal sign and thousand-delimiter sign
     /// in strings.
     /// </summary>
-    /// <param name="text">The read-only span that points the the text to be analysed.</param>
+    /// <param name="text">The read-only span that points the text to be analysed.</param>
     /// <returns>A structure that holds all results.</returns>
     public static FloatingPointAnalysisResult AnalyseText(ReadOnlySpan<char> text)
     {
@@ -40,6 +40,6 @@ public static class FloatingPointAnalysis
             }
         }
 
-        return new (numberOfCommas, indexOfLastComma, numberOfPoints, indexOfLastPoint);
+        return new FloatingPointAnalysisResult(numberOfCommas, indexOfLastComma, numberOfPoints, indexOfLastPoint);
     }
 }

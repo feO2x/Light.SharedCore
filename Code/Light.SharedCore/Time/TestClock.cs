@@ -9,7 +9,8 @@ namespace Light.SharedCore.Time;
 /// </summary>
 public sealed class TestClock : IClock
 {
-    private TestTimesEnumerator _testTimes; // This field MUST NOT be readonly, the struct instance must be able to mutate its state
+    // This field MUST NOT be readonly, the struct instance must be able to mutate its state
+    private TestTimesEnumerator _testTimes;
 
     /// <summary>
     /// Initializes a new instance of <see cref="TestClock" />.
@@ -37,7 +38,7 @@ public sealed class TestClock : IClock
     public TestClock(params DateTime[] times)
     {
         times.MustNotBeNullOrEmpty();
-        _testTimes = new (times);
+        _testTimes = new TestTimesEnumerator(times);
         _testTimes.TryGetNextTime(out var initialTime);
         InitialTime = CurrentTime = initialTime;
     }
@@ -76,7 +77,9 @@ public sealed class TestClock : IClock
     private void TrySetNextTestTime()
     {
         if (_testTimes.TryGetNextTime(out var nextTime))
+        {
             CurrentTime = nextTime;
+        }
     }
 
     private struct TestTimesEnumerator

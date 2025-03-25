@@ -42,9 +42,12 @@ public abstract class StringEntity<T> : IEntity<string>, IEquatable<T>, IMutable
     /// and being not trimmed. You can customize the validation process via
     /// <see cref="ValidateId" />.
     /// </exception>
-    protected StringEntity(string id) => _id = ValidateId(id, nameof(id));
+    protected StringEntity(string id) =>
+        _id = ValidateId(
+            id,
+            nameof(id)
+        ); // ReSharper disable StaticMemberInGenericType -- this is by design. We want to have different settings for different subtypes
 
-    // ReSharper disable StaticMemberInGenericType -- this is by design. We want to have different settings for different subtypes
     /// <summary>
     /// <para>
     /// Gets or sets the delegate that is used to validate IDs.
@@ -63,8 +66,8 @@ public abstract class StringEntity<T> : IEntity<string>, IEquatable<T>, IMutable
     }
 
     /// <summary>
-    /// Gets or sets the value indicating whether the default value for <see cref="Id"/> is null.
-    /// This defaults to true. If you set this value to false, <see cref="Id"/> will be set
+    /// Gets or sets the value indicating whether the default value for <see cref="Id" /> is null.
+    /// This defaults to true. If you set this value to false, <see cref="Id" /> will be set
     /// to <see cref="string.Empty" />.
     /// </summary>
     public static bool IsDefaultValueNull { get; set; } = true;
@@ -131,9 +134,18 @@ public abstract class StringEntity<T> : IEntity<string>, IEquatable<T>, IMutable
     {
         id.MustNotBeNullOrWhiteSpace(parameterName);
         if (id[0].IsWhiteSpace() || id[id.Length - 1].IsWhiteSpace())
+        {
             throw new StringException(parameterName, $"The ID must be trimmed, but you specified {id}");
+        }
+
         if (id.Length > 200)
-            throw new StringLengthException(parameterName, $"The ID should not be longer than 200 characters, but the following ID is {id.Length} characters long:{Environment.NewLine}{id}");
+        {
+            throw new StringLengthException(
+                parameterName,
+                $"The ID should not be longer than 200 characters, but the following ID is {id.Length} characters long:{Environment.NewLine}{id}"
+            );
+        }
+
         return id;
     }
 
@@ -151,8 +163,10 @@ public abstract class StringEntity<T> : IEntity<string>, IEquatable<T>, IMutable
     {
         // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         if (Id is null)
+        {
             return 0;
-        
+        }
+
         // ReSharper disable once NonReadonlyMemberInGetHashCode -- this must be handled properly by the caller.
         var comparisonMode = ComparisonMode;
         return comparisonMode switch
@@ -163,7 +177,9 @@ public abstract class StringEntity<T> : IEntity<string>, IEquatable<T>, IMutable
             StringComparison.InvariantCultureIgnoreCase => StringComparer.InvariantCultureIgnoreCase.GetHashCode(Id),
             StringComparison.Ordinal => Id.GetHashCode(),
             StringComparison.OrdinalIgnoreCase => StringComparer.OrdinalIgnoreCase.GetHashCode(Id),
-            _ => throw new InvalidOperationException($"The ComparisonMode property is set to an invalid value {comparisonMode}")
+            _ => throw new InvalidOperationException(
+                $"The ComparisonMode property is set to an invalid value {comparisonMode}"
+            )
         };
     }
 
